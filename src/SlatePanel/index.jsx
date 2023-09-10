@@ -3,16 +3,16 @@ import { Editor, createEditor, Element as SlateElement, Transforms } from 'slate
 import { Editable, ReactEditor, Slate, withReact } from 'slate-react'
 
 import withEmbeds from './withEmbeds'
+import withVoid from './withVoid'
+
 import * as ElementCompent from './component'
 import ToolBarButton from './component/ToolBarButton'
-import { INIT_DATA, embedReg, localName } from './dict'
-
-import { BLOCK_QUOTE, BOLD, CLEAR, IMAGE, ITALIC, YOUTUBE } from './dict'
+import { BLOCK_QUOTE, BOLD, CLEAR, IMAGE, ITALIC, YOUTUBE, INIT_DATA, embedReg, localName } from './dict'
 
 // 特定位置或选定文本范围内添加标记
 const toggleMark = (editor, format) => {
   const isActive = isMarkActive(editor, format)
-
+  editor.select(editor.selection || editor.range)
   if (isActive) {
     Editor.removeMark(editor, format)
   } else {
@@ -77,7 +77,7 @@ const activeEmbedFlow = (editor, event) => {
 }
 
 const SlatePanel = () => {
-  const [editor] = useState(() => withEmbeds(withReact(createEditor())))
+  const [editor] = useState(() => withVoid(withEmbeds(withReact(createEditor()))))
 
   const initialValue = useMemo(
     () =>

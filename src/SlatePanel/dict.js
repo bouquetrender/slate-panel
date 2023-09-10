@@ -7,6 +7,8 @@ export const BLOCK_QUOTE = 'blockQuote'
 export const IMAGE = 'image'
 export const YOUTUBE = 'youtube'
 
+export const VOID_ELEMENT = [IMAGE]
+
 // function
 export const CLEAR = 'clear'
 
